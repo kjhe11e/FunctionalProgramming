@@ -5,9 +5,10 @@ addThree :: Int -> Int -> Int -> Int
 addThree x y z = x + y + z
 
 
--------------------------------------------
+----------------------------------------------------
 --PATTERN MATCHING
--------------------------------------------
+-- makes sure value conforms to form and decomposes
+----------------------------------------------------
 
 --important to include "catch-all" clause
 --evaluated top-to-bottom
@@ -47,3 +48,46 @@ mySum (x:xs) = x + mySum xs
 firstLetterString :: String -> String
 firstLetterString "" = "Empty string, error."
 firstLetterString wholeString@(x:xs) = "The first letter of " ++ wholeString ++ " is " ++ [x]
+
+--------------------------------------
+-- GUARDS
+--------------------------------------
+
+heightTell :: (RealFloat a) => a -> String
+heightTell ht
+	| ht <= 60 = "Short"
+	| ht <= 65 = "Slightly short"
+	| ht <= 70 = "Average height"
+	| ht <= 74 = "Above average height"
+	| otherwise = "Tall"
+
+
+myMax :: (Ord a) => a -> a -> a
+myMax a b
+	| a > b 	= a
+	| otherwise = b
+
+
+myCompare :: (Ord a) => a -> a -> Ordering
+a `myCompare` b
+	| a > b 		= GT
+	| a == b 		= EQ
+	| otherwise 	= LT 
+
+bmiTell :: (RealFloat a) => a -> a -> String  
+bmiTell wt ht  
+    | bmi <= skinny = "Underweight"  
+    | bmi <= normal = "Normal"  
+    | bmi <= fat    = "Above"  
+    | otherwise     = "Very high BMI"  
+    where bmi = wt / ht ^ 2  
+          skinny = 18.7  	--note, these names only visibile to this function
+          normal = 26.0  
+          fat = 34.0
+
+
+returnInitials :: String -> String -> String  
+returnInitials firstname lastname = [f] ++ "." ++ [l] ++ "."  
+    where (f:_) = firstname  
+          (l:_) = lastname
+
