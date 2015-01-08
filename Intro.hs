@@ -91,3 +91,22 @@ returnInitials firstname lastname = [f] ++ "." ++ [l] ++ "."
     where (f:_) = firstname  
           (l:_) = lastname
 
+
+--case expressions: if no match caught, then runtime error occurs
+headList :: [a] -> a  
+headList xs = case xs of [] -> error "Empty list does not have head."  
+                         (x:_) -> x  
+
+--recursion:
+maxOfList :: (Ord a) => [a] -> a  
+maxOfList [] = error "Empty list."  
+maxOfList [x] = x  
+maxOfList (x:xs)   
+    | x > maxTail = x  
+    | otherwise = maxTail  
+    where maxTail = maxOfList xs  
+
+
+
+
+
